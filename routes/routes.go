@@ -6,5 +6,6 @@ import (
 )
 
 func Routes() {
+	http.HandleFunc("/", controllers.EmptyPath)
 	http.HandleFunc("/hello", controllers.Hello)
 }

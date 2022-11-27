@@ -8,13 +8,10 @@ import (
 )
 
 func Hello(response http.ResponseWriter, request *http.Request) {
-	// response.Header().Set("Content-type", "application/json")
+	response.Header().Set("Content-type", "application/json")
 	message := models.Message{
 		Message: "Hello World !",
 	}
-
-	// json.NewEncoder(response).Encode(message)
-
 	jsonResp, err := json.Marshal(message)
 	if err != nil {
 		response.WriteHeader(http.StatusBadGateway)
@@ -22,20 +19,23 @@ func Hello(response http.ResponseWriter, request *http.Request) {
 	} else {
 		response.WriteHeader(200)
 		response.Write(jsonResp)
-		log.Println(request.Method, http.StatusOK, request.URL.Path)
+		log.Println(request.Method, request.URL.Path, http.StatusOK)
 	}
-
-	// error := json.NewEncoder(response).Encode(message)
-	// if error != nil {
-	// 	response.WriteHeader(400)
-	// 	log.Println("Fait to hello world", error.Error(), "status: 400")
-	// } else {
-	// 	response.WriteHeader(200)
-	// 	json.NewEncoder(response).Encode(message)
-	// 	log.Println(request.Method, request.URL.Path)
-	// }
 }
 
-func EmptyPath() {
+func EmptyPath(response http.ResponseWriter, request *http.Request) {
+	response.Header().Set("Content-type", "application/json")
+	message := models.Message{
+		Message: "NO",
+	}
 
+	jsonResp, err := json.Marshal(message)
+
+	if err != nil {
+		log.Println("[HELLOWORLD]", request.Method, request.URL.Path, http.StatusBadGateway)
+	} else {
+		response.WriteHeader(http.StatusAccepted)
+		response.Write(jsonResp)
+		log.Println(request.Method, request.URL.Path, http.StatusOK)
+	}
 }
