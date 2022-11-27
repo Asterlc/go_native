@@ -8,7 +8,6 @@ import (
 )
 
 func Hello(response http.ResponseWriter, request *http.Request) {
-	response.Header().Set("Content-type", "application/json")
 	message := models.Message{
 		Message: "Hello World !",
 	}
@@ -24,7 +23,6 @@ func Hello(response http.ResponseWriter, request *http.Request) {
 }
 
 func EmptyPath(response http.ResponseWriter, request *http.Request) {
-	response.Header().Set("Content-type", "application/json")
 	message := models.Message{
 		Message: "NO",
 	}
