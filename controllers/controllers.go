@@ -7,18 +7,18 @@ import (
 	"net/http"
 )
 
-func Hello(response http.ResponseWriter, request *http.Request) {
+func Hello(res http.ResponseWriter, req *http.Request) {
 	message := models.Message{
 		Message: "Hello World !",
 	}
 	jsonResp, err := json.Marshal(message)
 	if err != nil {
-		response.WriteHeader(http.StatusBadGateway)
-		log.Println("[HELLOWORLD]", request.Method, http.StatusBadGateway, request.URL.Path)
+		res.WriteHeader(http.StatusBadGateway)
+		log.Println("[HELLOWORLD]", req.Method, http.StatusBadGateway, req.URL.Path)
 	} else {
-		response.WriteHeader(200)
-		response.Write(jsonResp)
-		log.Println(request.Method, request.URL.Path, http.StatusOK)
+		res.WriteHeader(200)
+		res.Write(jsonResp)
+		log.Println(req.Method, req.URL.Path, http.StatusOK)
 	}
 }
 
